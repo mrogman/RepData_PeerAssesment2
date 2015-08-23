@@ -1,0 +1,28 @@
+---
+title: "Storm Data"
+author: "Matt Rogman"
+date: "August 23, 2015"
+output: html_document
+---
+
+###Setup
+```{r}
+echo = TRUE
+options(scipen = 1)
+```
+###Processing
+Download the storm data and unzip if it does not already exist
+```{r}
+if (!"stormData.csv.bz2" %in% dir("./data/")) {
+    url <- "http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2"
+    download.file(url, destfile = "data/stormData.csv.bz2")
+}
+```
+
+Unzip and read the data into memory if it does not already exist in the working environment
+```{r}
+if (!"stormData" %in% ls()) {
+    stormData <- read.csv(bzfile("data/stormData.csv.bz2"), sep = ",")
+}
+head(stormData, n = 3)
+```
